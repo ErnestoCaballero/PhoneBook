@@ -33,18 +33,8 @@ public class User {
     }
 
     public String getFullName() {
-        String result;
-
-        if ("".equals(this.firstName) && "".equals(this.lastName)) {
-            result = "Unknown";
-        } else if ("".equals(this.firstName)) {
-            result = this.lastName;
-        } else if ("".equals(this.lastName)) {
-            result = this.firstName;
-        } else {
-            result = String.format("%s %s", this.firstName, this.lastName);
-        }
-        return result;
+        String fullName = (firstName + " " + lastName).trim();
+        return fullName.isEmpty() ? "Unknown" : fullName;
     }
 
 
