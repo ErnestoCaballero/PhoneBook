@@ -44,7 +44,6 @@ public class User {
         } else {
             result = String.format("%s %s", this.firstName, this.lastName);
         }
-
         return result;
     }
 
