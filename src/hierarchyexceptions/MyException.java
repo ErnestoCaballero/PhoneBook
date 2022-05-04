@@ -7,9 +7,18 @@ Inside the MyException class declare a constructor that takes String message as 
  */
 
 public class MyException extends Exception {
+    protected int a;
 
     public MyException(String message) {
         super(message);
     }
 
+    public MyException(int a, String message) {
+        super(message);
+        this.a = a;
+    }
+
+    public int getA() {
+        return a;
+    }
 }
