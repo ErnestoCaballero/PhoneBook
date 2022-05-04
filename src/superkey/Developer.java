@@ -4,6 +4,9 @@ public class Developer extends Employee {
     String mainLanguage;
     String[] skills;
 
+    public Developer(String mainLanguage) {
+        super();
+    }
     public Developer(String name, String email, int experience, String mainLanguage, String[] skills) {
         super(name, email, experience);
         this.mainLanguage = mainLanguage;
@@ -15,7 +18,7 @@ public class Developer extends Employee {
     }
 
     public String[] getSkills() {
-        return skills;
+        return this.skills.clone();
     }
 
     @Override

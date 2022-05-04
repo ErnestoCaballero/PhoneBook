@@ -13,5 +13,21 @@ public class Main {
         System.out.println();
 
         System.out.println(analyst);
+
+        System.out.println(developer.mainLanguage);
+
+        System.out.println();
+        Employee employee = new Employee("Albert", "einstein@email.com", 90);
+        System.out.println(employee);
+
+        System.out.println(employee.name);
+
+        int[] arr = {1, 2, 3};
+
+        try {
+
+        } catch (IndexOutOfBoundsException e) {
+
+        }
     }
 }

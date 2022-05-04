@@ -1,5 +1,7 @@
 package superkey;
 
+import java.util.Arrays;
+
 public class DataAnalyst extends Employee {
     boolean phd;
     String[] methods;
@@ -15,7 +17,7 @@ public class DataAnalyst extends Employee {
     }
 
     public String[] getMethods() {
-        return methods;
+        return this.methods.clone();
     }
 
     @Override
