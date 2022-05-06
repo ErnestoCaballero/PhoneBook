@@ -17,8 +17,15 @@ public class Main {
 //        System.out.println(file.lastModified());
 //        System.out.println(File.separator);
 
-        File directory = new File("/Users/ernestocaballero/Desktop/FilesClassJava");
+        File directory = new File("/Users/ernestocaballero/Documents/JetbrainsAcademy/JavaDeveloperTrack/PhoneBook/TestFiles/FilesTraversal01");
         printAllFiles(directory);
+        System.out.println();
+
+        File file1 = new File("/Users/ernestocaballero/Documents/JetbrainsAcademy/" +
+                "JavaDeveloperTrack/PhoneBook/TestFiles/FilesTraversal01/file1.txt");
+        File file2 = new File("/Users/ernestocaballero/Documents/JetbrainsAcademy/" +
+                "JavaDeveloperTrack/PhoneBook/TestFiles/FilesTraversal01/file2.txt");
+        System.out.println(areSibilings(file1, file2));
 
     }
 
@@ -27,5 +34,9 @@ public class Main {
         for (File i : files) {
             System.out.println(i.getName());
         }
+    }
+
+    public static boolean areSibilings(File file1, File file2) {
+        return file1.getParent().equals(file2.getParent());
     }
 }
