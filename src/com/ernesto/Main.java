@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println(File.separator);
+        System.out.println(Integer.MAX_VALUE);
     }
 
     public static void readFile() throws FileNotFoundException {
