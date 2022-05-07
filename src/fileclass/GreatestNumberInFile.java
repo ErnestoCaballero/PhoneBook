@@ -3,6 +3,7 @@ package fileclass;
 import java.io.File;
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class GreatestNumberInFile {
@@ -27,5 +28,7 @@ public class GreatestNumberInFile {
         }
 
         System.out.printf("The max number in the list is %d", max);
+
+
     }
 }
