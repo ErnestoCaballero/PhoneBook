@@ -38,7 +38,7 @@ public class WorldPopulation {
                 year = scanner.next();
                 number = scanner.nextLong();
                 change = number - previousElement;
-//                System.out.printf("year: %s | population %d | change: %f%n", year, number, change);
+                System.out.printf("year: %s | population %d | change: %f%n", year, number, change);
 
                 if (change > maxChange) {
                     maxChange = change;
