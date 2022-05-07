@@ -2,7 +2,6 @@ package fileclass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CountEvenNumberFromFile {
@@ -17,7 +16,7 @@ public class CountEvenNumberFromFile {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String value = scanner.nextLine();
-                System.out.printf("Number to parse: %s in records #%d%n", value, counter);
+//                System.out.printf("Number to parse: %s in records #%d%n", value, counter);
                 number = Integer.parseInt(value);
                 counter++;
                 if (number == 0) {
