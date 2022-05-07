@@ -2,35 +2,33 @@ package fileclass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CountEvenNumberFromFile {
 
     public static void main(String[] args) {
-        File file = new File("/Users/ernestocaballero/Downloads/dataset_91065.txt");
-        int number;
-        int evens = 0;
+        String fileLocation = "/Users/ernestocaballero/Downloads/dataset_91065.txt";
+//        int number;
+//        int evens = 0;
 
         try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextInt()) {
-                number = scanner.nextInt();
-                if (number == 0) {
-                    break;
-                }
-                if (number % 2 == 0) {
-                    evens++;
-                }
-            }
+            String fullFile = new String(Files.readAllBytes(Paths.get(fileLocation)));
+            System.out.println(fullFile);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + file.getPath());
+            System.out.println("File not found: " + fileLocation);
             return;
         } catch (NoSuchElementException e) {
             System.out.println("Not a valid input: " + e.getMessage());
             return;
+        } catch (IOException e) {
+            System.out.println("IOException found!");
+            return;
         }
 
-        System.out.printf("Evens are: %d%n", evens);
+//        System.out.printf("Evens are: %d%n", evens);
     }
 }
