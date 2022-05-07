@@ -11,11 +11,15 @@ public class CountEvenNumberFromFile {
         File file = new File("/Users/ernestocaballero/Downloads/dataset_91065.txt");
         int number;
         int evens = 0;
+        int counter = 1;
 
         try {
             Scanner scanner = new Scanner(file);
-            while (scanner.hasNextInt()) {
-                number = scanner.nextInt();
+            while (scanner.hasNextLine()) {
+                String value = scanner.nextLine();
+                System.out.printf("Number to parse: %s in records #%d%n", value, counter);
+                number = Integer.parseInt(value);
+                counter++;
                 if (number == 0) {
                     break;
                 }
@@ -25,10 +29,10 @@ public class CountEvenNumberFromFile {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + file.getPath());
-            return;
-        } catch (NoSuchElementException e) {
+        } catch (NumberFormatException e) {
             System.out.println("Not a valid input: " + e.getMessage());
-            return;
+        } catch (RuntimeException e) {
+            System.out.println("RuntimeException happen: " + e.getMessage());
         }
 
         System.out.printf("Evens are: %d%n", evens);
