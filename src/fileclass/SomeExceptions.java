@@ -19,5 +19,8 @@ public class SomeExceptions {
             System.out.println("The element doesn't exist. The file might be empty!");
         }
 
+        // Using the java.nio.file package
+
+
     }
 }
