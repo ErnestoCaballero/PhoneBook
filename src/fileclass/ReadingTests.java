@@ -48,6 +48,8 @@ public class ReadingTests {
 
         } catch (IOException e) {
             System.out.println("The file was not found! " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("That is not a valid input! " + e.getMessage());
         }
 
 
