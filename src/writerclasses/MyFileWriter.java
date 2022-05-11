@@ -7,9 +7,10 @@ import java.io.IOException;
 public class MyFileWriter {
 
     public static void main(String[] args) {
-        File file = new File("./TestFiles/WritingFiles/firstWriter.txt");
+        File file = new File("./TestFiles/WritingFiles/firstFileWriter.txt");
 
         try (FileWriter writer = new FileWriter(file)) {
+            writer.write("From the FileWriter class\n\n");
             writer.write("Hello, Ernesto\nYou're a great Java programmer!");
         } catch (IOException e) {
             System.out.println("IOException! " + e.getMessage());
