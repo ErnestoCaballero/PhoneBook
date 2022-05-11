@@ -1,2 +1,2 @@
 Hello, Ernesto
-You're a great programmer!
+You're a great Java programmer!

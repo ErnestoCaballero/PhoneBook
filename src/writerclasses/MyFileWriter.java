@@ -10,7 +10,7 @@ public class MyFileWriter {
         File file = new File("./TestFiles/WritingFiles/firstWriter.txt");
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write("Hello, Ernesto\nYou're a great programmer!");
+            writer.write("Hello, Ernesto\nYou're a great Java programmer!");
         } catch (IOException e) {
             System.out.println("IOException! " + e.getMessage());
         }
