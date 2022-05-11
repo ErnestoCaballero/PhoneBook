@@ -1,0 +1,3 @@
+From PrintWriter class
+The number you wrote was 45
+Great, you've write into this file!
