@@ -11,23 +11,17 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        File smallFind = new File("./TestFiles/StageOne/small_find.txt");
-        File smallDirectory = new File("./TestFiles/StageOne/small_directory.txt");
+        File smallFind = new File("./TestFiles/StageOne/find.txt");
+        File smallDirectory = new File("./TestFiles/StageOne/directory.txt");
         System.out.println("Start searching...");
+
         long start = System.currentTimeMillis();
-
         String[] toFind = getInputArray(smallFind);
-
         int found = countFoundElements(toFind, smallDirectory);
-
         long end = System.currentTimeMillis();
-        
         long[] timeFrame = getTimeLapse(end - start);
-        long minutes = timeFrame[0];
-        long seconds = timeFrame[1];
-        long ms = timeFrame[2];
 
-        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n", found, toFind.length, minutes, seconds , ms);
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n", found, toFind.length, timeFrame[0], timeFrame[1] , timeFrame[2]);
 
     }
 
@@ -41,9 +35,6 @@ public class Main {
                 currentName = scanner.nextLine().trim();
                 if (elementExists(toFind, currentName)) {
                     found++;
-                }
-                if (found == toFind.length) {
-                    return found;
                 }
             }
 
@@ -83,7 +74,6 @@ public class Main {
     static boolean elementExists(String[] arr, String toCheck) {
         for (String s : arr) {
             if (s.equals(toCheck)) {
-                removeElementFromArray(arr, toCheck);
                 return true;
             }
         }
