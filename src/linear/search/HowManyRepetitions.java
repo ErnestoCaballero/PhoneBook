@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class HowManyRepetitions {
 
     public static void main(String[] args) {
-        File file = new File("./TestFiles/DataSets/repetitionsFile.txt");
+        File file = new File("./TestFiles/DataSets/countRepetitions.txt");
 
-        System.out.println(countRepetitions(file, "5"));
+        System.out.println(countRepetitions(file, "7"));
 
     }
 
