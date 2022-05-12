@@ -20,12 +20,21 @@ public class Main {
         File output = new File("./TestFiles/WritingFiles/searchArray.txt");
 
         try (Scanner scanner = new Scanner(file); PrintWriter writer = new PrintWriter(output)) {
-            String[] array1 = scanner.nextLine().split(" ");
-            String[] array2 = scanner.nextLine().split(" ");
-            int result = countSteps(array1, array2);
-            System.out.println(result);
-            System.out.println("Writing Result into file...");
-            writer.printf("The iteration %d output the value of %d", 1, result);
+//            String[] array1 = scanner.nextLine().split(" ");
+//            String[] array2 = scanner.nextLine().split(" ");
+//            int result = countSteps(array1, array2);
+//            System.out.println(result);
+
+            int iterations = 0;
+            while (scanner.hasNextLine()) {
+                String[] array1 = scanner.nextLine().split(" ");
+                String[] array2 = scanner.nextLine().split(" ");
+                iterations++;
+                int result = countSteps(array1, array2);
+                System.out.println(result);
+                System.out.println("Writing Result into file...");
+                writer.printf("The iteration %d output the value of %d%n", iterations, result);
+            }
         } catch (IOException e) {
 
         }
