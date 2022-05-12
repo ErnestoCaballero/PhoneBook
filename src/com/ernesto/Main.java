@@ -1,10 +1,6 @@
 package com.ernesto;
 
-import jdk.swing.interop.SwingInterOpUtils;
-import superkey.Developer;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
