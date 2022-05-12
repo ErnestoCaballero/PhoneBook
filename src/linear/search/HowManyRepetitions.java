@@ -9,9 +9,11 @@ public class HowManyRepetitions {
     public static void main(String[] args) {
         File file = new File("./TestFiles/DataSets/repetitionsFile.txt");
 
+        System.out.println(countRepetitions(file, "5"));
+
     }
 
-    int countRepetitions(File file, String ref) {
+    static int countRepetitions(File file, String ref) {
         int count = 0;
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
