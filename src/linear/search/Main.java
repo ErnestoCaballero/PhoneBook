@@ -17,6 +17,8 @@ public class Main {
 
         printAndWriteStepsFromFile(input, output);
 
+
+
     }
 
     static int countSteps(int[] toFind, int[] toCheck) {
