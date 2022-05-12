@@ -8,28 +8,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        File input = new File("./TestFiles/arraysToSearch.txt");
+        File input1 = new File("./TestFiles/arraysToSearch.txt");
+
+        File input = new File("./TestFiles/DataSets/hyperskill-dataset-60677906.txt");
         File output = new File("./TestFiles/WritingFiles/searchArray.txt");
 
-        printStepsFromFile(input);
+        printStepsFromFile(input1);
 
-        try (Scanner scanner = new Scanner(input); PrintWriter writer = new PrintWriter(output)) {
-            int iterations = 0;
-            while (scanner.hasNextLine()) {
-                String[] array1 = scanner.nextLine().split(" ");
-                String[] array2 = scanner.nextLine().split(" ");
-                iterations++;
-                int result = countSteps(array1, array2);
-                System.out.println(result);
-                System.out.println("Writing Result into file...");
-                writer.printf("The iteration %d output the value of %d%n", iterations, result);
-            }
-        } catch (IOException e) {
-            System.out.println("IOException! " + e.getMessage());
-        } catch (NoSuchElementException e) {
-            System.out.println("The file may not have one line at the end! " + e.getMessage());
-        }
-
+        printAndWriteStepsFromFile(input, output);
 
     }
 
@@ -70,6 +56,26 @@ public class Main {
                 String[] array2 = scanner.nextLine().split(" ");
                 int result = countSteps(array1, array2);
                 System.out.println(result);
+            }
+        } catch (IOException e) {
+            System.out.println("An IOException has occur");
+        } catch (NoSuchElementException e) {
+            System.out.println("The file may not have one line at the end! " + e.getMessage());
+        }
+    }
+
+
+    static void printAndWriteStepsFromFile(File input, File output) {
+        int iterations = 0;
+        try (Scanner scanner = new Scanner(input); PrintWriter writer = new PrintWriter(output)) {
+            while (scanner.hasNextLine()) {
+                String[] array1 = scanner.nextLine().split(" ");
+                String[] array2 = scanner.nextLine().split(" ");
+                iterations++;
+                int result = countSteps(array1, array2);
+                System.out.println(result);
+                System.out.println("Writing Result into file...");
+                writer.printf("The iteration %d output the value of %d%n", iterations, result);
             }
         } catch (IOException e) {
             System.out.println("An IOException has occur");
