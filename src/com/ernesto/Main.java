@@ -18,9 +18,23 @@ public class Main {
 
         String[] toFind = getInputArray(smallFind);
 
+        int found = countFoundElements(toFind, smallDirectory);
+
+        long end = System.currentTimeMillis();
+        
+        long[] timeFrame = getTimeLapse(end - start);
+        long minutes = timeFrame[0];
+        long seconds = timeFrame[1];
+        long ms = timeFrame[2];
+
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n", found, toFind.length, minutes, seconds , ms);
+
+    }
+
+    public static int countFoundElements(String[] toFind, File directory) {
         int found = 0;
 
-        try (Scanner scanner = new Scanner(smallDirectory)) {
+        try (Scanner scanner = new Scanner(directory)) {
             String currentName;
             while (scanner.hasNextLine()) {
                 scanner.next();
@@ -29,21 +43,15 @@ public class Main {
                     found++;
                 }
                 if (found == toFind.length) {
-                    break;
+                    return found;
                 }
             }
+
         } catch (IOException e) {
-            System.out.println();
+            System.out.println("File might not have been found!");
         }
 
-        long end = System.currentTimeMillis();
-        long lapse = end - start;
-        long minutes = lapse / 1_000 / 60;
-        long seconds = (lapse / 1_000) % 60;
-        long ms = lapse % 1000;
-
-        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n", found, toFind.length, minutes, seconds , ms);
-
+        return found;
     }
 
     public static String[] getInputArray(File input) {
@@ -110,6 +118,18 @@ public class Main {
         }
 
         result[result.length - 1] = toReplace[toReplace.length - 1];
+
+        return result;
+    }
+
+    public static long[] getTimeLapse(long lapse) {
+        long[] result = new long[3];
+        long minutes = lapse / 1_000 / 60;
+        result[0] = minutes;
+        long seconds = (lapse / 1_000) % 60;
+        result[1] = seconds;
+        long ms = lapse % 1000;
+        result[2] = ms;
 
         return result;
     }
