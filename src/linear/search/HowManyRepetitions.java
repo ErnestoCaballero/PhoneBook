@@ -13,8 +13,6 @@ public class HowManyRepetitions {
 
         System.out.println(countRepetitions(file));
 
-
-
     }
 
     static int countRepetitions(File file, String ref) {
