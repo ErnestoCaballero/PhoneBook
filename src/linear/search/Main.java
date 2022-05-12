@@ -3,6 +3,7 @@ package linear.search;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -36,7 +37,9 @@ public class Main {
                 writer.printf("The iteration %d output the value of %d%n", iterations, result);
             }
         } catch (IOException e) {
-
+            System.out.println("IOException! " + e.getMessage());
+        } catch (NoSuchElementException e) {
+            System.out.println("The file may not have one line at the end! " + e.getMessage());
         }
 
     }
