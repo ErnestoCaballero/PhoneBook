@@ -8,24 +8,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        int[] arr1 = {0, 4, 8, 0, 6, 1, 4, 8, 0, 7};
-//        int[] arr2 = {3, 2, 9, 0, 6, 9, 2, 2, 5, 7};
-//        String[] arr1 = {"0", "4", "8", "0", "6", "1", "4", "8", "0", "7"};
-//        String[] arr2 = {"3", "2", "9", "0", "6", "9", "2", "2", "5", "7"};
-//
-//        System.out.println(countSteps(arr1, arr2));
-//
-//        System.out.println();
-
-        File file = new File("./TestFiles/arraysToSearch.txt");
+        File input = new File("./TestFiles/DataSets/hyperskill-dataset-60677906.txt");
         File output = new File("./TestFiles/WritingFiles/searchArray.txt");
 
-        try (Scanner scanner = new Scanner(file); PrintWriter writer = new PrintWriter(output)) {
-//            String[] array1 = scanner.nextLine().split(" ");
-//            String[] array2 = scanner.nextLine().split(" ");
-//            int result = countSteps(array1, array2);
-//            System.out.println(result);
-
+        try (Scanner scanner = new Scanner(input); PrintWriter writer = new PrintWriter(output)) {
             int iterations = 0;
             while (scanner.hasNextLine()) {
                 String[] array1 = scanner.nextLine().split(" ");
