@@ -7,13 +7,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        File smallFind = new File("./TestFiles/StageOne/find.txt");
-        File smallDirectory = new File("./TestFiles/StageOne/directory.txt");
+        File findFile = new File("./TestFiles/StageOne/find.txt");
+        File directoryFile = new File("./TestFiles/StageOne/directory.txt");
         System.out.println("Start searching...");
 
         long start = System.currentTimeMillis();
-        String[] toFind = getInputArray(smallFind);
-        int found = countFoundElements(toFind, smallDirectory);
+        String[] toFind = getInputArray(findFile);
+        int found = countFoundElements(toFind, directoryFile);
         long end = System.currentTimeMillis();
         long[] timeFrame = getTimeLapse(end - start);
 
