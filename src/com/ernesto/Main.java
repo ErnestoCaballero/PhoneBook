@@ -2,6 +2,7 @@ package com.ernesto;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -23,14 +24,18 @@ public class Main {
 
     public static int countFoundElements(String[] toFind, File directory) {
         int found = 0;
+        int line = 0;
 
-        try (Scanner scanner = new Scanner(directory)) {
+        try (Scanner scanner = new Scanner(directory); PrintWriter writer = new PrintWriter("./TestFiles/WritingFiles/directoryResult.txt")) {
+            writer.printf("NAME;LINE_NUMBER%n");
             String currentName;
             while (scanner.hasNextLine()) {
+                line++;
                 scanner.next();
                 currentName = scanner.nextLine().trim();
                 if (elementExists(toFind, currentName)) {
                     found++;
+                    writer.printf("%s;%d%n", currentName, line);
                 }
             }
 
