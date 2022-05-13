@@ -27,15 +27,15 @@ public class Main {
         int line = 0;
 
         try (Scanner scanner = new Scanner(directory); PrintWriter writer = new PrintWriter("./TestFiles/WritingFiles/directoryResult.txt")) {
-            writer.printf("NAME;LINE_NUMBER%n");
+            writer.printf("PHONE_NUMBER;NAME;LINE_NUMBER%n");
             String currentName;
             while (scanner.hasNextLine()) {
                 line++;
-                scanner.next();
+                String phoneNumber=scanner.next();
                 currentName = scanner.nextLine().trim();
                 if (elementExists(toFind, currentName)) {
                     found++;
-                    writer.printf("%s;%d%n", currentName, line);
+                    writer.printf("%s;%s;%d%n", phoneNumber, currentName, line);
                 }
             }
 
