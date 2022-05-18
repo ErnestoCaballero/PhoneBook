@@ -33,6 +33,7 @@ public class Main {
                     curr += step;
                 }
             } else {
+                // arr[curr] > value case
                 for (int i = curr - 1; i > curr - step; i--) {
                     if (i < 0) {
                         return -1;
