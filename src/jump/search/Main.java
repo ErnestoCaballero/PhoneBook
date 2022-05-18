@@ -7,8 +7,8 @@ public class Main {
         int value = 39;
 
 //        System.out.println(jumpSearch(arr, value));
-//        System.out.printf("Result %d", myJumpSearch(arr, value));
-        System.out.println(geeksJumpSearch(arr, value));
+        System.out.printf("Result %d", myJumpSearch(arr, value));
+//        System.out.println(geeksJumpSearch(arr, value));
 
     }
 
@@ -32,7 +32,7 @@ public class Main {
                 } else {
                     curr += step;
                 }
-            } else if (arr[curr] > value) {
+            } else {
                 for (int i = curr - 1; i > curr - step; i--) {
                     if (i < 0) {
                         return -1;
@@ -42,8 +42,6 @@ public class Main {
                     }
                 }
                 return -1;
-            } else {
-                break;
             }
         }
 
