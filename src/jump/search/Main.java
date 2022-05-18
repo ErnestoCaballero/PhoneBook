@@ -13,24 +13,15 @@ public class Main {
 
     public static int myJumpSearch(int[] arr, int value) {
         int step = (int) Math.floor(Math.sqrt(arr.length));
-        System.out.println("Step = " + step);
-
         int curr = 0;
-        int iteration = 0;
 
         while (curr < arr.length) {
-            System.out.printf("Enter while | curr = %d | Iteration = %d | arr[curr] = %d%n", curr, iteration, arr[curr]);
-
             if (arr[curr] == value) {
-                System.out.printf("Enter arr[%d] == %d%n", curr, value);
                 return curr;
-            } else if (arr[curr] < value /*&& curr < arr.length - step*/) {
-                System.out.printf("Enter arr[%d](%d) < %d%n", curr, arr[curr], value);
+            } else if (arr[curr] < value) {
                 if (curr + step >= arr.length) {
-                    System.out.println("ENTER | curr = " + curr);
                     // Check last block
                     for (int i = curr; i < arr.length; i++) {
-                        System.out.printf("\tfor i = %d | arr[%d](%d) == %d\n", i, i, arr[i], value);
                         if (arr[i] == value) {
                             return curr;
                         }
@@ -38,16 +29,13 @@ public class Main {
                     }
                     return -1;
                 } else {
-                    System.out.println("ENTER 2 " + (curr + step));
                     curr += step;
                 }
             } else if (arr[curr] > value) {
-                System.out.printf("Enter arr[%d](%d) > %d%n", curr, arr[curr], value);
                 for (int i = curr - 1; i > curr - step; i--) {
                     if (i < 0) {
                         return -1;
                     }
-
                     if (arr[i] == value) {
                         return i;
                     }
@@ -56,8 +44,6 @@ public class Main {
             } else {
                 break;
             }
-
-            iteration++;
         }
 
         return -1;
