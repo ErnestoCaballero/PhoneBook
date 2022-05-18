@@ -3,12 +3,14 @@ package jump.search;
 public class Main {
 
     public static void main(String[] args) {
-        int[] arr = {10, 13, 19, 20, 24, 26, 30, 34, 37};
-        int value = 39;
-
+//        int[] arr = {10, 13, 19, 20, 24, 26, 30, 34, 37};
+//        int value = 39;
+//
 //        System.out.println(jumpSearch(arr, value));
-        System.out.printf("Result %d", myJumpSearch(arr, value));
+//        System.out.printf("Result %d", myJumpSearch(arr, value));
 //        System.out.println(geeksJumpSearch(arr, value));
+
+
 
     }
 
