@@ -1,37 +1,28 @@
 package com.ernesto;
 
+import java.util.Scanner;
+
 public class TestClass {
 
     public static void main(String[] args) {
+        String[] arr = {"a", "aa", "az", "aza"};
+        System.out.println(isAlphabetical(arr));
 
-        System.out.println("Starting...");
-        long start = System.currentTimeMillis();
-        try {
-            Thread.sleep(3500);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
+        Scanner scanner = new Scanner(System.in);
+        String[] myArr = scanner.nextLine().split(" ");
+        System.out.println(isAlphabetical(arr));
+
+
+
+    }
+
+    public static boolean isAlphabetical(String[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i + 1].compareTo(arr[i]) < 0) {
+                return false;
+            }
         }
-        long end = System.currentTimeMillis();
-        long lapse = end - start;
-
-        long minutes = lapse / 1_000 / 60;
-        long seconds = (lapse / 1_000) % 60;
-        long ms = lapse % 1000;
-//        double ms = lapse - (minutes * 60 * 1_000) - (seconds * 1_000 + ()
-        System.out.println("Minutes: " + minutes + " | seconds: " + seconds  + " | ms: " + ms);
-
-        System.out.println(end - start);
-        System.out.println(lapse);
-
-        System.out.println();
-
-        long time = 125_301;
-        long minutes1 = time / 1_000 / 60;
-        long seconds1 = (time / 1_000) % 60;
-        long ms1 = time % 1000;
-        System.out.println("Minutes: " + minutes1 + " | seconds: " + seconds1  + " | ms: " + ms1);
-
-
+        return true;
     }
 
     public static String[] removeElementFromArray(String[] toReplace, String toRemove) {
