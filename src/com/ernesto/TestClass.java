@@ -5,12 +5,11 @@ import java.util.Scanner;
 public class TestClass {
 
     public static void main(String[] args) {
-        String[] arr = {"a", "aa", "az", "aza"};
-        System.out.println(isAlphabetical(arr));
+        String[] currArr = "45073498 Celestina Orren".split(" ");
+        String[] nextArr = "30781414 Esofea".split(" ");
+        System.out.println(currArr.length);
+        System.out.println(nextArr.length);
 
-        Scanner scanner = new Scanner(System.in);
-        String[] myArr = scanner.nextLine().split(" ");
-        System.out.println(isAlphabetical(arr));
 
 
 
