@@ -9,31 +9,50 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        File findFile = new File("./TestFiles/StageOne/small_find.txt");
-        File unsortedDirectory = new File("./TestFiles/StageOne/small_directory.txt");
-        System.out.println(unsortedDirectory.isFile());
-        System.out.println("Start searching...");
+        File findFile = new File("./TestFiles/StageOne/find.txt");
+        File unsortedDirectory = new File("./TestFiles/StageOne/directory.txt");
 
         // Linear Search procedure
+        System.out.println("Start searching (linear search)...");
         long start = System.currentTimeMillis();
         String[] toFind = getInputArray(findFile);
         int found = countFoundElements(toFind, unsortedDirectory);
         long end = System.currentTimeMillis();
         long[] timeFrame = getTimeLapse(end - start);
-        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n", found, toFind.length, timeFrame[0], timeFrame[1] , timeFrame[2]);
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n",
+                found,
+                toFind.length,
+                timeFrame[0],
+                timeFrame[1] ,
+                timeFrame[2]);
 
         System.out.println();
 
 
         // Bubble Sort and Jump Search procedure
+        System.out.println("Start searching (bubble sort + jump search)...");
+
+        long sortTime1 = System.currentTimeMillis();
         String[] directory = getInputArray(unsortedDirectory);
         String[] sortedDirectory = sortStringArray(directory);
+        formatToFind(toFind);
+        formatDirectory(sortedDirectory);
+        long sortTime2 = System.currentTimeMillis();
+        long[] sortingTime = getTimeLapse(sortTime2 - sortTime1);
+
+        long searchTime1 = System.currentTimeMillis();
         int foundJumping = countFoundElements(toFind, sortedDirectory);
-//        System.out.printf("Elements found using Jump Search Algorithm: %d", foundJumping);
+        long searchTime2 = System.currentTimeMillis();
+        long[] searchingTime = getTimeLapse(searchTime2 - searchTime1);
 
-        for (String s : sortedDirectory) System.out.printf("%s\n", s);
-
-
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
+                foundJumping,
+                toFind.length,
+                sortingTime[0] + searchingTime[0],
+                sortingTime[1] + searchingTime[1],
+                sortingTime[2] + searchingTime[2]);
+        System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
+        System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
 
     }
 
@@ -69,12 +88,14 @@ public class Main {
     }
 
     public static boolean myJumpSearch(String[] arr, String value) {
+//        System.out.printf("Enter myJumpSearch | toFind = %s%n", value);
         int step = (int) Math.floor(Math.sqrt(arr.length));
         int curr = 0;
 
-
         while (curr < arr.length) {
+//            System.out.printf("\tChecking if element %d (%s) is %s | %s.compateTo(%s) = %d\n", curr, arr[curr], value, arr[curr], value, arr[curr].compareTo(value));
             if (arr[curr].equals(value)) {
+//                System.out.printf("\t\tElement found!\n");
                 return true;
             } else if (arr[curr].compareTo(value) < 0) {
                 if (curr + step >= arr.length) {
@@ -91,11 +112,12 @@ public class Main {
                 }
             } else {
                 // arr[curr].compareTo(value) > 0
+//                System.out.printf("\t\tEnter arr[curr].compareTo(value) > 0\n");
                 for (int i = curr - 1; i > curr - step; i--) {
-                    if (arr[curr].compareTo(value) < 0) {
+                    if (arr[i].compareTo(value) < 0) {
                         return false;
                     }
-                    if (arr[curr].equals(value)) {
+                    if (arr[i].equals(value)) {
                         return true;
                     }
                 }
@@ -215,5 +237,34 @@ public class Main {
             System.out.printf("%s ", s);
         }
         System.out.println();
+    }
+
+    public static void formatDirectory(String[] arr) {
+//        try (PrintWriter writer = new PrintWriter("./TestFiles/WritingFiles/formattedSortedDirectory.txt")) {
+        for (int i = 0; i < arr.length; i++) {
+            String[] tmp = arr[i].split(" ");
+            if (tmp.length > 2) {
+                arr[i] = String.format("%s%s", tmp[1].toLowerCase(), tmp[2].toLowerCase());
+//                    writer.printf("%s\n", arr[i]);
+            } else {
+                    arr[i] = String.format("%s", tmp[1].toLowerCase());
+//                    writer.printf("%s\n", arr[i]);
+            }
+        }
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+
+    }
+
+    public static void formatToFind(String[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            String[] tmp = arr[i].split(" ");
+            if (tmp.length > 1) {
+                arr[i] = String.format("%s%s", tmp[0].toLowerCase(), tmp[1].toLowerCase());
+            } else {
+                arr[i] = arr[i].toLowerCase();
+            }
+        }
     }
 }
