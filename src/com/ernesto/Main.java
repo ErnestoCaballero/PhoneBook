@@ -3,7 +3,6 @@ package com.ernesto;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -14,11 +13,11 @@ public class Main {
 
         // Linear Search procedure
         System.out.println("Start searching (linear search)...");
-        long start = System.currentTimeMillis();
+        long startLinear = System.currentTimeMillis();
         String[] toFind = getInputArray(findFile);
         int found = countFoundElements(toFind, unsortedDirectory);
-        long end = System.currentTimeMillis();
-        long[] timeFrame = getTimeLapse(end - start);
+        long endLinear = System.currentTimeMillis();
+        long[] timeFrame = getTimeLapse(endLinear - startLinear);
         System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.%n",
                 found,
                 toFind.length,
@@ -32,16 +31,34 @@ public class Main {
         // Bubble Sort and Jump Search procedure
         System.out.println("Start searching (bubble sort + jump search)...");
 
+        // Bubble Sort
         long sortTime1 = System.currentTimeMillis();
-        String[] directory = getInputArray(unsortedDirectory);
-        String[] sortedDirectory = sortStringArray(directory);
-        formatToFind(toFind);
-        formatDirectory(sortedDirectory);
+        String[] directory = getDirectoryArray(unsortedDirectory);
+        if (sortStringArray(directory, endLinear - startLinear)) {
+            long sortStop = System.currentTimeMillis();
+            long[] stopped = getTimeLapse(sortStop - sortTime1);
+            long linearStart = System.currentTimeMillis();
+            int linearFound = countFoundElements(toFind, unsortedDirectory);
+            long linearEnd = System.currentTimeMillis();
+            long[] linearTime = getTimeLapse(linearEnd - linearStart);
+            System.out.printf("Found %s/%s entries. Time taken: %d min. %d sec. %d ms.\n",
+                    linearFound,
+                    toFind.length,
+                    linearTime[0] + stopped[0],
+                    linearTime[1] + stopped[1],
+                    linearTime[2] + stopped[2]);
+            System.out.printf("Sorting time: %d min. %d sec. %d ms. - STOPPED, moved to linear search\n", stopped[0], stopped[1], stopped[2]);
+            System.out.printf("Searching time: %d min. %d sec. %d ms.", linearTime[0], linearTime[1], linearTime[2]);
+            return;
+        }
+
         long sortTime2 = System.currentTimeMillis();
         long[] sortingTime = getTimeLapse(sortTime2 - sortTime1);
 
+        // JumpSearch
         long searchTime1 = System.currentTimeMillis();
-        int foundJumping = countFoundElements(toFind, sortedDirectory);
+        formatToFind(toFind);
+        int foundJumping = countFoundElements(toFind, directory);
         long searchTime2 = System.currentTimeMillis();
         long[] searchingTime = getTimeLapse(searchTime2 - searchTime1);
 
@@ -56,24 +73,24 @@ public class Main {
 
     }
 
-    public static String[] sortStringArray(String[] array) {
-        String[] arr = Arrays.copyOf(array, array.length);
+    public static boolean sortStringArray(String[] arr, long ref) {
+        long sortStart = System.currentTimeMillis();
 
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
-                String[] currArr = arr[j].split(" ");
-                String curr = currArr.length < 3 ? String.format("%s", currArr[1].toLowerCase()) : String.format("%s%s", currArr[1].toLowerCase(), currArr[2].toLowerCase());
-                String[] nextArr = arr[j + 1].split(" ");
-                String next = nextArr.length < 3 ? String.format("%s", nextArr[1].toLowerCase()) : String.format("%s%s", nextArr[1].toLowerCase(), nextArr[2].toLowerCase());
-                if (curr.compareTo(next) > 0) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
                     String x = arr[j + 1];
                     arr[j + 1] = arr[j];
                     arr[j] = x;
                 }
+                long iteration = System.currentTimeMillis();
+                if (iteration - sortStart > ref * 10) {
+                    return true;
+                }
             }
         }
 
-        return arr;
+        return false;
     }
 
     public static int countFoundElements(String[] toFind, String[] directory) {
@@ -173,6 +190,37 @@ public class Main {
 
         } catch (IOException e) {
             System.out.println();
+        }
+
+        return null;
+    }
+
+    public static String[] getDirectoryArray(File input) {
+        int countLines = 0;
+
+        try (Scanner scanner = new Scanner(input); Scanner scanner1 = new Scanner(input)) {
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+                countLines++;
+            }
+
+            String[] directory = new String[countLines];
+            int i = 0;
+
+            while (scanner1.hasNextLine()) {
+                String[] currName = scanner1.nextLine().split(" ");
+                if (currName.length > 2) {
+                    directory[i] = String.format("%s%s", currName[1].toLowerCase(), currName[2].toLowerCase());
+                } else {
+                    directory[i] = String.format("%s", currName[1].toLowerCase());
+                }
+                i++;
+            }
+
+            return directory;
+
+        } catch (IOException e) {
+            System.out.println("IOException encountered! " + e.getMessage());
         }
 
         return null;
