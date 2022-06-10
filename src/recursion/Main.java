@@ -2,8 +2,7 @@ package recursion;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(sumFirstN(6));
-        System.out.println(method(29815));
+
 
     }
 
@@ -34,5 +33,13 @@ public class Main {
             return 0;
         }
         return n % 10 + method(n / 10);
+    }
+
+    // Fibonacci
+    public static int fib(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fib(n - 1) + fib(n - 2);
     }
 }
