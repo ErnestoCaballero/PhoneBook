@@ -2,7 +2,7 @@ package recursion;
 
 public class Main {
     public static void main(String[] args) {
-
+        System.out.println(pow(2, 5));
 
     }
 
@@ -41,5 +41,28 @@ public class Main {
             return n;
         }
         return fib(n - 1) + fib(n - 2);
+    }
+
+
+    // N-th power using recursion
+    public static double pow(double a, long n) {
+        if (a == 0) {
+            return 0;
+        }
+
+        if (n == 0) {
+            return 1;
+        }
+
+        double y;
+        if (n % 2 == 0) {
+            y = pow(a, n / 2);
+            y = y * y;
+        } else {
+            y = a;
+            y = y * pow(a, n - 1);
+        }
+
+        return y;
     }
 }
