@@ -3,9 +3,9 @@ package binary.search;
 public class Main {
 
     public static void main(String[] args) {
-        int[] arr = {10, 13, 19, 20, 24, 26, 30, 34, 35, 40};
-        System.out.println(myBinarySearch(arr, 34));
-
+        int[] arr = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50};
+//        System.out.println(myBinarySearch(arr, 34));
+        System.out.println("Took " + binarySearch7(arr) + " iterations");
     }
 
     public static int myBinarySearch(int[] arr, int tgt) {
@@ -24,6 +24,31 @@ public class Main {
             }
         }
 
+        return -1;
+    }
+
+    static int binarySearch7(int[] arr) {
+        int tgt = arr[6];
+
+        int left = 0;
+        int right = arr.length - 1;
+        int comparisons = 0;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            comparisons++;
+
+            if (arr[mid] == tgt) {
+                System.out.println("Number found!");
+                return comparisons;
+            } else if (tgt > arr[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        System.out.println("Number not found :(");
         return -1;
     }
 }
