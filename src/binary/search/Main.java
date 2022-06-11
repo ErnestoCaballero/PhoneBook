@@ -7,10 +7,14 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 5, 7, 8, 9, 10};
+        int[] arr = {0, 14, 19, 23, 28, 30, 33, 44, 52, 52, 62, 65, 76, 91, 94};
+        int[] search = {83, 42, 3, 11, 72, 17, 32, 42, 68, 13, 11, 6, 22, 40, 26};
 
-        File sortedFile = new File("./TestFiles/DataSets/binaryDataset_01.txt");
-        System.out.println(binarySearchFile(sortedFile, 35));
+//        System.out.println(arr[leftBinarySearch(arr, 6)]);
+
+        for (int i : search) {
+            System.out.printf("%d ", arr[approximateSearch(arr, i)]);
+        }
 
     }
 
@@ -31,6 +35,48 @@ public class Main {
         }
 
         return -1;
+    }
+
+    // Searches the nearest value to the target value
+    public static int approximateSearch(int[] arr, int tgt) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int middle = (left + right) / 2;
+
+            if (middle + 1 >= arr.length) return middle;
+
+            if (arr[middle] == tgt) {
+                return middle;
+            } else if (tgt > arr[middle]) {
+                if (Math.abs(arr[middle] - tgt) <= Math.abs(arr[middle + 1] - tgt)) {
+                    return middle;
+                }
+
+                if (Math.abs(arr[left] - tgt) <= Math.abs(arr[middle + 1] - tgt)) {
+                    return left;
+                }
+
+                left = middle + 1;
+            } else {
+                if (right - 1 < 0) {
+                    return right;
+                }
+
+                if (Math.abs(arr[middle] - tgt) <= Math.abs(arr[middle - 1] - tgt)) {
+                    return middle;
+                }
+
+                if (arr[right] - tgt < arr[middle - 1] - tgt) {
+                    return right;
+                }
+
+                right = middle - 1;
+            }
+        }
+
+        return left;
     }
 
     static int binarySearchFile(File sortedFile, int tgt) {
@@ -77,7 +123,6 @@ public class Main {
             comparisons++;
 
             if (arr[mid] == tgt) {
-                System.out.println("Number found!");
                 return comparisons;
             } else if (tgt > arr[mid]) {
                 left = mid + 1;
@@ -86,7 +131,6 @@ public class Main {
             }
         }
 
-        System.out.println("Number not found :(");
         return -1;
     }
 
