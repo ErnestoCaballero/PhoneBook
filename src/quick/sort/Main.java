@@ -28,6 +28,7 @@ public class Main {
         }
 
         int pivot = arr[right];
+//        System.out.printf("Pivot %d \n", pivot);
         int leftPointer = partition(arr, left, right, pivot);
 
         quickSort(arr, left, leftPointer - 1);
@@ -55,10 +56,17 @@ public class Main {
                 rightPointer--;
             }
 
+//            System.out.printf("\tSwapping element %d with %d\n", arr[leftPointer], arr[rightPointer]);
             swap(arr, leftPointer, rightPointer);
+//            System.out.printf("\t");
+//            printArray(arr);
+
         }
 
+//        System.out.printf("\tNow swapping pivot to middle\n");
         swap(arr, leftPointer, right);
+//        System.out.printf("\t");
+//        printArray(arr);
         return leftPointer;
     }
 
