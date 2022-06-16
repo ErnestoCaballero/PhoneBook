@@ -1,5 +1,6 @@
 package quick.sort;
 
+import java.awt.image.renderable.RenderableImage;
 import java.util.Random;
 
 public class Main {
@@ -27,6 +28,20 @@ public class Main {
         }
 
         int pivot = arr[right];
+        int leftPointer = partition(arr, left, right, pivot);
+
+        quickSort(arr, left, leftPointer - 1);
+        quickSort(arr, leftPointer + 1, right);
+
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    private static int partition(int[] arr, int left, int right, int pivot) {
         int leftPointer = left;
         int rightPointer = right;
 
@@ -44,21 +59,8 @@ public class Main {
         }
 
         swap(arr, leftPointer, right);
-
-        quickSort(arr, left, leftPointer - 1);
-        quickSort(arr, leftPointer + 1, right);
-
+        return leftPointer;
     }
-
-    private static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-
-//    private static int partition(int[] arr, int left, int right, int pivot) {
-//
-//    }
 
     public static void printArray(int[] arr) {
         for (int i : arr) {
