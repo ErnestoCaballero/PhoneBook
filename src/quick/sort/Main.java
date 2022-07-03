@@ -19,7 +19,6 @@ public class Main {
 
         printArray(numbers);
 
-
     }
 
     public static void quickSort(int[] arr, int left, int right) {
@@ -27,9 +26,7 @@ public class Main {
             return;
         }
 
-        int pivot = arr[right];
-//        System.out.printf("Pivot %d \n", pivot);
-        int leftPointer = partition(arr, left, right, pivot);
+        int leftPointer = partition(arr, left, right);
 
         quickSort(arr, left, leftPointer - 1);
         quickSort(arr, leftPointer + 1, right);
@@ -42,9 +39,11 @@ public class Main {
         arr[j] = tmp;
     }
 
-    private static int partition(int[] arr, int left, int right, int pivot) {
+    private static int partition(int[] arr, int left, int right) {
         int leftPointer = left;
         int rightPointer = right;
+        int pivot = arr[right];
+//        System.out.printf("Pivot %d \n", pivot);
 
         while (leftPointer < rightPointer) {
 
