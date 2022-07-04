@@ -30,7 +30,6 @@ public class Main {
 
         quickSort(arr, left, leftPointer - 1);
         quickSort(arr, leftPointer + 1, right);
-
     }
 
     private static void swap(int[] arr, int i, int j) {

@@ -71,6 +71,102 @@ public class Main {
         System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
         System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
 
+        System.out.println();
+
+
+        // Quick Sort + Binary Search procedure
+        System.out.println("Start searching (quick sort + binary search)...");
+
+        // Quick Sort
+        long quickSortTime1 = System.currentTimeMillis();
+        String[] quickDirectory = getDirectoryArray(unsortedDirectory);
+        quickSortArray(quickDirectory, 0, quickDirectory.length - 1);
+        long quickSortTime2 = System.currentTimeMillis();
+        sortingTime = getTimeLapse(quickSortTime2 - quickSortTime1);
+
+        // Binary Search
+        long binarySearchTime1 = System.currentTimeMillis();
+        int foundBinary = countElementsBinary(toFind, quickDirectory);
+        long binarySearchTime2 = System.currentTimeMillis();
+        searchingTime = getTimeLapse(binarySearchTime2 - binarySearchTime1);
+
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
+                foundJumping,
+                toFind.length,
+                sortingTime[0] + searchingTime[0],
+                sortingTime[1] + searchingTime[1],
+                sortingTime[2] + searchingTime[2]);
+        System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
+        System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
+
+    }
+
+    public static int countElementsBinary(String[] toFind, String[] directory) {
+        int found = 0;
+        for (String s : toFind) {
+            if (binarySearch(directory, s)) {
+                found++;
+            }
+        }
+        return found;
+    }
+
+    public static boolean binarySearch(String[] arr, String value) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int middle = (left + right) / 2;
+            if (arr[middle].compareTo(value) == 0) {
+                return true;
+            } else if (arr[middle].compareTo(value) < 0) {
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+
+        return false;
+    }
+
+    public static void quickSortArray(String[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        int leftPointer = partition(arr, left, right);
+
+        quickSortArray(arr, left, leftPointer - 1);
+        quickSortArray(arr, leftPointer + 1, right);
+
+    }
+
+    public static int partition(String[] arr, int left, int right) {
+        int leftPointer = left;
+        int rightPointer = right;
+        String pivot = arr[right];
+
+        while (leftPointer < rightPointer) {
+            while (arr[leftPointer].compareTo(pivot) <= 0 && leftPointer < rightPointer) {
+                leftPointer++;
+            }
+
+            while (arr[rightPointer].compareTo(pivot) >= 0 && leftPointer < rightPointer) {
+                rightPointer--;
+            }
+
+            swap(arr, leftPointer, rightPointer);
+        }
+
+        swap(arr, leftPointer, right);
+
+        return leftPointer;
+    }
+
+    private static void swap(String[] arr, int i, int j) {
+        String tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
 
     public static boolean sortStringArray(String[] arr, long ref) {
