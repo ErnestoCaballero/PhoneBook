@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        File findFile = new File("./TestFiles/StageOne/find.txt");
-        File unsortedDirectory = new File("./TestFiles/StageOne/directory.txt");
+        File findFile = new File("./TestFiles/StageOne/small_find.txt");
+        File unsortedDirectory = new File("./TestFiles/StageOne/small_directory.txt");
 
         // Linear Search procedure
         System.out.println("Start searching (linear search)...");
@@ -26,7 +26,6 @@ public class Main {
                 timeFrame[2]);
 
         System.out.println();
-
 
         // Bubble Sort and Jump Search procedure
         System.out.println("Start searching (bubble sort + jump search)...");
@@ -48,31 +47,30 @@ public class Main {
                     linearTime[1] + stopped[1],
                     linearTime[2] + stopped[2]);
             System.out.printf("Sorting time: %d min. %d sec. %d ms. - STOPPED, moved to linear search\n", stopped[0], stopped[1], stopped[2]);
-            System.out.printf("Searching time: %d min. %d sec. %d ms.", linearTime[0], linearTime[1], linearTime[2]);
-            return;
+            System.out.printf("Searching time: %d min. %d sec. %d ms.\n", linearTime[0], linearTime[1], linearTime[2]);
+        } else {
+            long sortTime2 = System.currentTimeMillis();
+            long[] sortingTime = getTimeLapse(sortTime2 - sortTime1);
+
+            // JumpSearch
+            long searchTime1 = System.currentTimeMillis();
+            formatToFind(toFind);
+            int foundJumping = countFoundElements(toFind, directory);
+            long searchTime2 = System.currentTimeMillis();
+            long[] searchingTime = getTimeLapse(searchTime2 - searchTime1);
+
+            System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
+                    foundJumping,
+                    toFind.length,
+                    sortingTime[0] + searchingTime[0],
+                    sortingTime[1] + searchingTime[1],
+                    sortingTime[2] + searchingTime[2]);
+            System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
+            System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
         }
 
-        long sortTime2 = System.currentTimeMillis();
-        long[] sortingTime = getTimeLapse(sortTime2 - sortTime1);
-
-        // JumpSearch
-        long searchTime1 = System.currentTimeMillis();
-        formatToFind(toFind);
-        int foundJumping = countFoundElements(toFind, directory);
-        long searchTime2 = System.currentTimeMillis();
-        long[] searchingTime = getTimeLapse(searchTime2 - searchTime1);
-
-        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
-                foundJumping,
-                toFind.length,
-                sortingTime[0] + searchingTime[0],
-                sortingTime[1] + searchingTime[1],
-                sortingTime[2] + searchingTime[2]);
-        System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
-        System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
-
         System.out.println();
-
+        formatToFind(toFind);
 
         // Quick Sort + Binary Search procedure
         System.out.println("Start searching (quick sort + binary search)...");
@@ -82,16 +80,16 @@ public class Main {
         String[] quickDirectory = getDirectoryArray(unsortedDirectory);
         quickSortArray(quickDirectory, 0, quickDirectory.length - 1);
         long quickSortTime2 = System.currentTimeMillis();
-        sortingTime = getTimeLapse(quickSortTime2 - quickSortTime1);
+        long[] sortingTime = getTimeLapse(quickSortTime2 - quickSortTime1);
 
         // Binary Search
         long binarySearchTime1 = System.currentTimeMillis();
         int foundBinary = countElementsBinary(toFind, quickDirectory);
         long binarySearchTime2 = System.currentTimeMillis();
-        searchingTime = getTimeLapse(binarySearchTime2 - binarySearchTime1);
+        long[] searchingTime = getTimeLapse(binarySearchTime2 - binarySearchTime1);
 
         System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
-                foundJumping,
+                foundBinary,
                 toFind.length,
                 sortingTime[0] + searchingTime[0],
                 sortingTime[1] + searchingTime[1],
