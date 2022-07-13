@@ -3,13 +3,15 @@ package com.ernesto;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
-        File findFile = new File("./TestFiles/StageOne/small_find.txt");
-        File unsortedDirectory = new File("./TestFiles/StageOne/small_directory.txt");
+        File findFile = new File("./TestFiles/StageOne/find.txt");
+        File unsortedDirectory = new File("./TestFiles/StageOne/directory.txt");
 
         // Linear Search procedure
         System.out.println("Start searching (linear search)...");
@@ -96,6 +98,53 @@ public class Main {
                 sortingTime[2] + searchingTime[2]);
         System.out.printf("Sorting time: %d min. %d sec. %d ms.\n", sortingTime[0], sortingTime[1], sortingTime[2]);
         System.out.printf("Searching time: %d min. %d sec. %d ms.\n", searchingTime[0], searchingTime[1], searchingTime[2]);
+
+        System.out.println();
+
+
+        // Hashing
+        System.out.println("Start searching (hash table)...");
+
+        // Loading HashSet
+
+        long loadTime1 = System.currentTimeMillis();
+        Set<String> hashDirectory = new HashSet<>();
+
+        try (Scanner scanner = new Scanner(unsortedDirectory)) {
+            String[] currName;
+            while (scanner.hasNextLine()) {
+                currName = scanner.nextLine().split(" ");
+                if (currName.length > 2) {
+                    hashDirectory.add(String.format("%s%s", currName[1].toLowerCase(), currName[2].toLowerCase()));
+                } else {
+                    hashDirectory.add(String.format("%s", currName[1].toLowerCase()));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("IOException found! " + e.getMessage());
+        }
+        long loadTime2 = System.currentTimeMillis();
+        long[] hashCreate = getTimeLapse(loadTime2 - loadTime1);
+
+        // Searching time
+        long hashSearch1 = System.currentTimeMillis();
+        int countHash = 0;
+        for (String s : toFind) {
+            if (hashDirectory.contains(s)) {
+                countHash++;
+            }
+        }
+        long hashSearch2 = System.currentTimeMillis();
+        long[] hashSearch = getTimeLapse(hashSearch2 - hashSearch1);
+
+        System.out.printf("Found %d/%d entries. Time taken: %d min. %d sec. %d ms.\n",
+                countHash,
+                toFind.length,
+                hashCreate[0] + hashSearch[0],
+                hashCreate[1] + hashSearch[1],
+                hashCreate[2] + hashSearch[2]);
+        System.out.printf("Creating time: %d min. %d sec. %d ms.\n", hashCreate[0], hashCreate[1], hashCreate[2]);
+        System.out.printf("Searching time: %d min. %d sec. %d ms.\n", hashSearch[0], hashSearch[1], hashSearch[2]);
 
     }
 
